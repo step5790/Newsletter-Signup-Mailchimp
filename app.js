@@ -25,9 +25,11 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
   const name = req.body.nameSub;
   const email = req.body.email;
+
+  // us12 comes from API key, changed the ${}
   const url = "https://us12.api.mailchimp.com/3.0/lists/7201a4dab7";
 
-  // adding options > method:POST, authenticaion: any name:api key
+  // adding options for our http request > method:POST, authenticaion: any name:api key
   const options = {
     method: "POST",
     auth: "stephen:2c90bf21bde653870f61043e7aaa4e8b",
