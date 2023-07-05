@@ -1,0 +1,3 @@
+[submodule "signup"]
+	path = signup
+	url = https://github.com/step5790/Newsletter-Signup-Mailchimp.git
