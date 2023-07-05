@@ -5,6 +5,14 @@ const app = express();
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
+require("dotenv").config();
+
+const mailchimp = require("@mailchimp/mailchimp_marketing");
+
+mailchimp.setConfig({
+  apiKey: process.env.key,
+  server: "us12",
+});
 
 // use bodyParser in app
 app.use(bodyParser.urlencoded({ extended: true }));
