@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // to use static img, css into server, public relative url, make folder: public>css + images
 app.use(express.static("public"));
 
-app.listen(3000, function () {
+// add dynamic port from heroku or 3000
+app.listen(process.env.PORT || 3000, function () {
   console.log("servcer running");
 });
 
@@ -32,7 +33,7 @@ app.post("/", function (req, res) {
   // adding options for our http request > method:POST, authenticaion: any name:api key
   const options = {
     method: "POST",
-    auth: "stephen:2c90bf21bde653870f61043e7aaa4e8b",
+    auth: "stephen:07d1286e75b3144cfce5d697581a3eac",
   };
   const data = {
     members: [
@@ -50,18 +51,31 @@ app.post("/", function (req, res) {
 
   // creating request variable, adding http.request,
   const request = https.request(url, options, function (response) {
+    // adding error message, res from app.post
+    if (response.statusCode === 200) {
+      res.sendFile(__dirname + "/success.html");
+    } else {
+      res.sendFile(__dirname + "/failure.html");
+    }
+
     // adding response.on to received data
     response.on("data", function (data) {
+      console.log("Subscribed");
       console.log(JSON.parse(data));
     });
   });
 
   // write the date to mailchimp server
-  request.write(jsonData);
+  // request.write(jsonData);
 
   // sepcifiy were done with writing
   request.end();
 });
 
 // 7201a4dab7
-// 2c90bf21bde653870f61043e7aaa4e8b-us12
+// 07d1286e75b3144cfce5d697581a3eac-us12
+
+// html form action will call route > adding for failure route, using redirect method, woill trigger app.get (above code)
+app.post("/failure", function (req, res) {
+  res.redirect("/");
+});
