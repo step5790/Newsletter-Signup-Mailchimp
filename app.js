@@ -41,7 +41,7 @@ app.post("/", function (req, res) {
   // adding options for our http request > method:POST, authenticaion: any name:api key
   const options = {
     method: "POST",
-    auth: "stephen:877d72d199681d6c10dc0be526666140",
+    auth: `stephen:${process.env.key}`,
   };
   const data = {
     members: [
@@ -79,9 +79,6 @@ app.post("/", function (req, res) {
   // sepcifiy were done with writing
   request.end();
 });
-
-// 7201a4dab7
-// 877d72d199681d6c10dc0be526666140-us12
 
 // html form action will call route > adding for failure route, using redirect method, woill trigger app.get (above code)
 app.post("/failure", function (req, res) {
