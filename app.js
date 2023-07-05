@@ -22,7 +22,7 @@ app.use(express.static("public"));
 
 // add dynamic port from heroku or 3000
 app.listen(process.env.PORT || 3000, function () {
-  console.log("servcer running");
+  console.log("subscribed");
 });
 
 // send the html to local server
@@ -54,6 +54,8 @@ app.post("/", function (req, res) {
       },
     ],
   };
+
+  console.log(process.env.key);
 
   const jsonData = JSON.stringify(data);
 
