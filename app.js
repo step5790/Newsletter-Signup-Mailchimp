@@ -38,10 +38,13 @@ app.post("/", function (req, res) {
   // us12 comes from API key, changed the ${}
   const url = "https://us12.api.mailchimp.com/3.0/lists/7201a4dab7";
 
+  const authenticate = `stephen:${process.env.key}`;
+  console.log(authenticate);
+
   // adding options for our http request > method:POST, authenticaion: any name:api key
   const options = {
     method: "POST",
-    auth: `stephen:${process.env.key}`,
+    auth: authenticate,
   };
   const data = {
     members: [
@@ -54,8 +57,6 @@ app.post("/", function (req, res) {
       },
     ],
   };
-
-  console.log(process.env.key);
 
   const jsonData = JSON.stringify(data);
 
