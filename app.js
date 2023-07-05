@@ -10,7 +10,7 @@ require("dotenv").config();
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 mailchimp.setConfig({
-  apiKey: process.env.KEY,
+  apiKey: process.env.key,
   server: "us12",
 });
 
@@ -38,7 +38,7 @@ app.post("/", function (req, res) {
   // us12 comes from API key, changed the ${}
   const url = "https://us12.api.mailchimp.com/3.0/lists/7201a4dab7";
 
-  const authenticate = `stephen:${process.env.KEY}`;
+  const authenticate = `stephen:${process.env.key}`;
   console.log(authenticate);
 
   // adding options for our http request > method:POST, authenticaion: any name:api key
@@ -65,13 +65,13 @@ app.post("/", function (req, res) {
     // adding error message, res from app.post
     if (response.statusCode === 200) {
       res.sendFile(__dirname + "/success.html");
+      console.log("Subscribed");
     } else {
       res.sendFile(__dirname + "/failure.html");
     }
 
     // adding response.on to received data
     response.on("data", function (data) {
-      console.log("Subscribed");
       console.log(JSON.parse(data));
     });
   });
