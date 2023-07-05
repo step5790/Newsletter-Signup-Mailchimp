@@ -5,14 +5,14 @@ const app = express();
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
-require("dotenv").config();
+// require("dotenv").config();
 
-const mailchimp = require("@mailchimp/mailchimp_marketing");
+// const mailchimp = require("@mailchimp/mailchimp_marketing");
 
-mailchimp.setConfig({
-  apiKey: process.env.KEY,
-  server: "us12",
-});
+// mailchimp.setConfig({
+//   apiKey: process.env.KEY,
+//   server: "us12",
+// });
 
 // use bodyParser in app
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,13 +39,13 @@ app.post("/", function (req, res) {
   const url = "https://us12.api.mailchimp.com/3.0/lists/7201a4dab7";
 
   const authenticate = `stephen:${process.env.KEY}`;
-  console.log(authenticate);
 
   // adding options for our http request > method:POST, authenticaion: any name:api key
   const options = {
     method: "POST",
     auth: authenticate,
   };
+  console.log(authenticate);
   const data = {
     members: [
       {
