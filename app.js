@@ -10,7 +10,7 @@ require("dotenv").config();
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 mailchimp.setConfig({
-  apiKey: process.env.key,
+  apiKey: process.env.KEY,
   server: "us12",
 });
 
@@ -22,7 +22,7 @@ app.use(express.static("public"));
 
 // add dynamic port from heroku or 3000
 app.listen(process.env.PORT || 3000, function () {
-  console.log("subscribed");
+  console.log("server running at port 3000");
 });
 
 // send the html to local server
@@ -38,7 +38,7 @@ app.post("/", function (req, res) {
   // us12 comes from API key, changed the ${}
   const url = "https://us12.api.mailchimp.com/3.0/lists/7201a4dab7";
 
-  const authenticate = `stephen:${process.env.key}`;
+  const authenticate = `stephen:${process.env.KEY}`;
   console.log(authenticate);
 
   // adding options for our http request > method:POST, authenticaion: any name:api key
